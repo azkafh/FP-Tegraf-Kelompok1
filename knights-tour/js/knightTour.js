@@ -76,7 +76,14 @@ class KnightTour {
     }
 
     // Warnsdorff 
-    moves.sort((a, b) => a.degree - b.degree || Math.random() - 0.5)
+    moves.sort((a, b) => a.degree - b.degree)
+
+    if (!isClosed) {
+      for (let i = moves.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+        ;[moves[i], moves[j]] = [moves[j], moves[i]]
+      }
+    }
 
     for (const m of moves) {
       this.board[m.x][m.y] = moveCount
