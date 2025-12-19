@@ -1,0 +1,97 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #fefae0; /* Background netral agar palet warna pop-up */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+.container {
+    text-align: center;
+    width: 90%;
+    max-width: 1000px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #cdb4db;
+}
+
+.highlight {
+    color: #a2d2ff;
+}
+
+/* Wrapper untuk kartu */
+.button-wrapper {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Styling Kotak Utama */
+.card {
+    background: white;
+    width: 320px;
+    padding: 40px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Warna Spesifik sesuai Palet */
+.knight-card {
+    background-color: #bde0fe;
+}
+
+.lis-card {
+    background-color: #ffc8dd;
+}
+
+.icon {
+    font-size: 6rem;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+/* Hover Effect */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    border-color: #ffafcc;
+}
+
+/* Active Effect (Saat dipencet) */
+.card:active {
+    transform: scale(0.95);
+    background-color: #cdb4db;
+    color: white;
+}
+
+.tree-icon {
+    width: 6rem;
+    height: 6rem;
+    margin-bottom: 20px;
+}
