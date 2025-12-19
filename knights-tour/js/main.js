@@ -103,7 +103,7 @@ class KnightTourApp {
     const { row, col } = this.startPosition
     const isClosed = this.tourType === "closed"
 
-    const solved = this.knightTour.solveKnightTour(row, col, isClosed)
+    const solved = this.knightTour.solve(row, col, isClosed)
 
     if (!solved) {
       alert("No solution found for this starting position!")
