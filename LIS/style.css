@@ -1,0 +1,354 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #bde0fe 0%, #a2d2ff 100%);
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+}
+
+#title {
+  color: white;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 36px;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #ffafcc;
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s;
+  z-index: 1000;
+}
+
+.back-button:hover {
+  background: #ffc8dd;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 60px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+/* Controls Card */
+.controls-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: calc(100% - 40px);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "title title"
+    "sequence result"
+    "buttons result";
+  column-gap: 30px;
+  row-gap: 20px;
+}
+
+.controls-card h2 {
+  grid-area: title;
+  color: #cdb4db;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.control-section:nth-of-type(1) {
+  grid-area: sequence;
+}
+
+.control-section:nth-of-type(2) {
+  grid-area: buttons;
+  display: flex;
+  align-items: center;
+}
+
+.control-section:nth-of-type(3) {
+  grid-area: result;
+}
+
+.control-section h3 {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .controls-card {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "sequence"
+      "buttons"
+      "result";
+  }
+}
+
+/* Input Field */
+#sequenceInput {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #cdb4db;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+#sequenceInput:focus {
+  outline: none;
+  border-color: #a2d2ff;
+}
+
+/* Generate and Reset Buttons */
+.generate-btn {
+  width: calc(100% - 110px);
+  padding: 16px;
+  background: #a2d2ff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.generate-btn:hover {
+  background: #bde0fe;
+  box-shadow: 0 6px 16px rgba(162, 210, 255, 0.4);
+}
+
+.generate-btn:disabled {
+  background: #ddd;
+  cursor: not-allowed;
+}
+
+.play-icon {
+  font-size: 16px;
+}
+
+.reset-btn {
+  width: 100px;
+  padding: 16px;
+  background: #ffafcc;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-left: 10px;
+}
+
+.reset-btn:hover {
+  background: #ffc8dd;
+  box-shadow: 0 6px 16px rgba(162, 210, 255, 0.4);
+}
+
+/* Result Box */
+.result-box {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: flex-start;
+}
+
+.result-item:last-child {
+  margin-bottom: 0;
+}
+
+.result-label {
+  color: #666;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.result-value {
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+  max-width: 180px;
+  text-align: right;
+  word-break: break-word;
+}
+
+/* Visualization Container */
+.board-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% - 40px);
+}
+
+.board-container h1 {
+  color: white;
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.visualization-wrapper {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 100%;
+  overflow: auto;
+}
+
+#treeSVG {
+  min-height: 700px;
+  display: block;
+}
+
+/* Tree Node Animation */
+.tree-node {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tree-node circle {
+  fill: white;
+  stroke: #cdb4db;
+  stroke-width: 3;
+  transition: all 0.3s ease;
+}
+
+.tree-node.visited circle {
+  fill: #a2d2ff;
+  stroke: #8ab8e6;
+  animation: nodeVisit 0.6s ease;
+}
+
+.tree-node.active circle {
+  fill: #ffd700;
+  stroke: #ffb700;
+  stroke-width: 4;
+  animation: pulse 1s infinite;
+}
+
+.tree-node.path circle {
+  fill: #cdb4db;
+  stroke: #9b5de5;
+  stroke-width: 4;
+}
+
+.tree-node text {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  fill: #333;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+.tree-node-label {
+  font-family: "Poppins", sans-serif;
+  font-size: 11px;
+  fill: #666;
+  text-anchor: middle;
+}
+
+/* Tree Edge Styles */
+.tree-edge {
+  stroke: #e0d4f0;
+  stroke-width: 2;
+  fill: none;
+  transition: stroke 0.3s ease;
+}
+
+.tree-edge.visited {
+  stroke: #a2d2ff;
+  stroke-width: 3;
+  animation: edgeVisit 0.5s ease;
+}
+
+.tree-edge.path {
+  stroke: #cdb4db;
+  stroke-width: 4;
+}
+
+/* Animations */
+@keyframes nodeVisit {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes edgeVisit {
+  0% {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .controls-card {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .board-container {
+    width: 100%;
+  }
+}

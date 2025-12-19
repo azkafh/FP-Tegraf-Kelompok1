@@ -12,8 +12,16 @@ body {
   position: relative;
 }
 
+#title {
+  color: white;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 36px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
 .back-button {
-  position: fixed;
+  position: absolute;
   top: 20px;
   left: 20px;
   background: #ffafcc;
@@ -24,18 +32,16 @@ body {
   font-weight: 600;
   transition: all 0.3s;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .back-button:hover {
   background: #ffc8dd;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 16px rgba(162, 210, 255, 0.4);
 }
 
 .container {
   max-width: 1400px;
-  margin: 60px auto 0;
+  margin: 30px auto 0;
   display: flex;
   gap: 40px;
   align-items: flex-start;
@@ -49,6 +55,7 @@ body {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   width: 350px;
   flex-shrink: 0;
+  margin-left: 50px;
 }
 
 .controls-card h2 {
@@ -89,6 +96,7 @@ body {
 
 .tour-btn:hover {
   background: #f5f5f5;
+  box-shadow: 0 6px 16px rgba(162, 210, 255, 0.4);
 }
 
 .tour-btn.active {
@@ -96,44 +104,9 @@ body {
   color: white;
 }
 
-/* Speed Slider */
-#speedSlider {
-  width: 100%;
-  height: 8px;
-  border-radius: 5px;
-  background: #e0e0e0;
-  outline: none;
-  -webkit-appearance: none;
-}
-
-#speedSlider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #a2d2ff;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-#speedSlider::-webkit-slider-thumb:hover {
-  background: #bde0fe;
-  transform: scale(1.2);
-}
-
-#speedSlider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #a2d2ff;
-  cursor: pointer;
-  border: none;
-}
-
 /* Generate Button */
 .generate-btn {
-  width: calc(100% - 60px);
+  width: calc(100% - 90px);
   padding: 16px;
   background: #a2d2ff;
   color: white;
@@ -152,7 +125,6 @@ body {
 
 .generate-btn:hover {
   background: #bde0fe;
-  transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(162, 210, 255, 0.4);
 }
 
@@ -167,7 +139,7 @@ body {
 }
 
 .reset-btn {
-  width: 50px;
+  width: 70px;
   padding: 16px;
   background: #ffafcc;
   color: white;
@@ -181,33 +153,9 @@ body {
 
 .reset-btn:hover {
   background: #ffc8dd;
-  transform: rotate(180deg);
+  box-shadow: 0 6px 16px rgba(162, 210, 255, 0.4);
 }
 
-/* Instructions */
-.instructions {
-  list-style: none;
-  padding: 0;
-}
-
-.instructions li {
-  padding: 8px 0;
-  padding-left: 24px;
-  position: relative;
-  color: #666;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.instructions li:before {
-  content: "•";
-  position: absolute;
-  left: 8px;
-  color: #cdb4db;
-  font-weight: bold;
-}
-
-/* Path Display */
 .path-display {
   background: #f8f9fa;
   padding: 15px;
@@ -232,7 +180,6 @@ body {
   color: white;
   font-size: 36px;
   margin-bottom: 30px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .board-wrapper {
@@ -240,10 +187,8 @@ body {
   background: white;
   padding: 20px;
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
-/* Chessboard */
 .chessboard {
   display: grid;
   grid-template-columns: repeat(8, 70px);
@@ -271,26 +216,36 @@ body {
 }
 
 .tile.light {
-  background: #ffc8dd;
+  background: #ffddeb;
 }
 
 .tile.dark {
-  background: #cdb4db;
+  background: #dcc5e3;
 }
 
 .tile:hover {
   opacity: 0.8;
-  transform: scale(0.95);
 }
 
-.tile.visited {
-  background: #ffafcc !important;
+.tile.light.visited {
+  background: #ffc8dd !important;
+  animation: visitPulse 0.5s ease;
+}
+
+.tile.dark.visited {
+  background: #cdb4db !important;
   animation: visitPulse 0.5s ease;
 }
 
 .tile.current {
   background: #a2d2ff !important;
   animation: pulse 1s infinite;
+}
+
+.visit-number {
+  font-size: 20px;
+  font-weight: 600;
+  color: #666;
 }
 
 @keyframes visitPulse {
@@ -313,7 +268,6 @@ body {
   }
 }
 
-/* Canvas for lines */
 #lineCanvas {
   position: absolute;
   top: 20px;
@@ -322,7 +276,6 @@ body {
   z-index: 2;
 }
 
-/* Responsive */
 @media (max-width: 1200px) {
   .container {
     flex-direction: column;
